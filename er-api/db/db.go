@@ -29,7 +29,7 @@ func connectionKey() string {
 }
 
 func Init() *gorm.DB {
-	db, err := gorm.Open(postgres.Open(connectionKey()), &gorm.Config{})
+	db, err := gorm.Open(postgres.Open(connectionKey()), &gorm.Config{SkipDefaultTransaction: true})
 	if err != nil {
 		panic(err)
 	}

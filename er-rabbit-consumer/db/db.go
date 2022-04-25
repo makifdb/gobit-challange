@@ -30,7 +30,7 @@ func connectionKey() string {
 }
 
 func WriteDatabase(time time.Time, eur float64, try float64) *gorm.DB {
-	db, err := gorm.Open(postgres.Open(connectionKey()), &gorm.Config{})
+	db, err := gorm.Open(postgres.Open(connectionKey()), &gorm.Config{SkipDefaultTransaction: true})
 	if err != nil {
 		panic(err)
 	}
