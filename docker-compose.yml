@@ -1,0 +1,47 @@
+version: "3"
+services:
+    rabbitmq:
+        image: rabbitmq:3.10-rc-alpine
+        restart: always
+        env_file:
+            - .env 
+        ports:
+            - "${RABBITMQ_PORT}:${RABBITMQ_PORT}"
+
+    postgres:
+        image: postgres:13-alpine
+        restart: always
+        env_file:
+            - .env 
+        ports:
+            - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+        volumes:
+            - ./${POSTGRES_VOLUME}:/var/lib/postgresql/data
+    
+    er-api-consumer:
+        build: ./er-api-consumer
+        restart: on-failure
+        env_file:
+            - .env
+        volumes:
+            - "/etc/localtime:/etc/localtime:ro"
+        depends_on:
+            - rabbitmq
+
+    er-rabbit-consumer:
+        build: ./er-rabbit-consumer
+        restart: on-failure
+        env_file:
+            - .env
+        depends_on:
+            - postgres
+
+    er-api:
+        build: ./er-api
+        restart: on-failure
+        env_file:
+            - .env
+        ports:
+            - "${ER_API_PORT}:${ER_API_PORT}"
+        depends_on:
+            - postgres
