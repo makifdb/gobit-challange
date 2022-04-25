@@ -68,8 +68,7 @@ func main() {
 			if err != nil {
 				log.Printf("Error: %s", err)
 			}
-			var time time.Time
-			time = message.Time
+			var time time.Time = message.Time
 
 			db.WriteDatabase(time, message.Rate.EUR, message.Rate.TRY)
 		}
