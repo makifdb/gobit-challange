@@ -1,6 +1,6 @@
 # GOBİT Challange
 
-This demo created for gobit camp.
+This demo created for GOBIT Camp.
 
 ## System Design
 
@@ -27,11 +27,11 @@ docker-compose build
 docker-compose up
 ```
 
-
-
 ## Api Design 
 
 ### List last database record from given parite
+
+! ATTENTION - Time is recorded and displayed in the database using the UTC time zone.
 
 ```
 /api/exchange/{parite}
