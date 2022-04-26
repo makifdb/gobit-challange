@@ -2,6 +2,23 @@
 
 This demo created for gobit camp.
 
+## System Design
+
+```
+exchangerateapi --> er-api-consumer --> rabbitmq --> er-rabbit-consumer --> postresql --> er-api --> public
+```
+## Configure
+
+İnsert your ExchangeRate-API Key in .env file to ER_API_CONSUMER_KEY
+
+```
+ER_API_CONSUMER_KEY=xxxxxxxxxxxxxx
+```
+
+All other environment variables are in .env file. You can edit them to your taste.
+
+## Build and Run
+
 ```console
 docker-compose build
 ```
@@ -10,27 +27,20 @@ docker-compose build
 docker-compose up
 ```
 
-## System Design
 
-```mermaid
-  graph TD;
-      A-->B;
-      A-->C;
-      B-->D;
-      C-->D;
+
+## Api Design 
+
+### List last database record from given parite
+
 ```
-
-exchangerateapi --> er-api-consumer --> rabbitmq --> er-rabbit-consumer --> postresql --> er-api --> public
-
-### er-api 
-
-#### GET /api/exchange/{parite}
-
-List last database record from given parite
+/api/exchange/{parite}
+```
 
 ```web
-localhost:3000/api/exchange/TRY
+GET  -  localhost:3000/api/exchange/TRY
 ```
+response:
 
 ```json
 {
@@ -45,14 +55,16 @@ localhost:3000/api/exchange/TRY
 	"status": "success"
 }
 ```
+### List all database record
 
-#### GET /api/exchange/
-
-List all database record
+```
+ /api/exchange
+```
 
 ```web
-localhost:3000/api/exchange
+GET  -  localhost:3000/api/exchange
 ```
+response:
 
 ```json
 {
@@ -67,21 +79,21 @@ localhost:3000/api/exchange
 		{
 			"ID": 2,
 			"Time": "2022-04-25T19:18:19.271282Z",
-			"USD": 0,
+			"USD": 1,
 			"EUR": 0.9259,
 			"TRY": 14.7667
 		},
 		{
 			"ID": 3,
 			"Time": "2022-04-25T19:20:07.988473Z",
-			"USD": 0,
+			"USD": 1,
 			"EUR": 0.9259,
 			"TRY": 14.7667
 		},
 		{
 			"ID": 4,
 			"Time": "2022-04-25T19:21:08.028916Z",
-			"USD": 0,
+			"USD": 1,
 			"EUR": 0.9259,
 			"TRY": 14.7667
 		}
