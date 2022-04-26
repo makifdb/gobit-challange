@@ -27,11 +27,12 @@ docker-compose build
 docker-compose up
 ```
 
-## Api Design 
+## Api Design
+
+`ATTENTION` - Time is recorded and displayed in the database using the UTC time zone.
 
 ### List last database record from given parite
 
-! ATTENTION - Time is recorded and displayed in the database using the UTC time zone.
 
 ```
 /api/exchange/{parite}
@@ -40,7 +41,6 @@ docker-compose up
 ```web
 GET  -  localhost:3000/api/exchange/TRY
 ```
-response:
 
 ```json
 {
@@ -64,7 +64,6 @@ response:
 ```web
 GET  -  localhost:3000/api/exchange
 ```
-response:
 
 ```json
 {
